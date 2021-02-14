@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Zot Hikes</string>
+    <string name="zot_hikes">Zot Hikes</string>
+    <string name="info_prompt">Enter your information below and hit "Finish" when done:</string>
+    <string name="name_prompt">Name:</string>
+    <string name="age_prompt">Age:</string>
+    <string name="height_prompt">Height(in inches):</string>
+    <string name="weight_prompt">Weight(in pounds):</string>
+    <string name="gender_prompt">Gender:</string>
+    <string name="target_weight_prompt">Target Weight:</string>
+    <string name="name_hint">Name</string>
+    <string name="age_hint">Age</string>
+    <string name="height_hint">Height</string>
+    <string name="weight_hint">Weight</string>
+    <string name="gender_hint">Gender</string>
+    <string name="goal_hint">Target Weight</string>
+    <string name="finish_button">Finish</string>
+</resources>
