@@ -15,4 +15,6 @@
     <string name="gender_hint">Gender</string>
     <string name="goal_hint">Target Weight</string>
     <string name="finish_button">Finish</string>
+    <string name="confirmation_prompt">Please confirm the data you have entered is correct. If you would like to make a change, press the back arrow.</string>
+    <string name="confirm_button_prompt">Confirm</string>
 </resources>
