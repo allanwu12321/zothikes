@@ -20,4 +20,7 @@
     <string name="title_activity_nearby_map">Map</string>
     <string name="open_map">Open Map</string>
     <string name="title_activity_maps">Map</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="recommendation">Recommendation</string>
+    <string name="cs_125_group_13_aaron_yao_jimmy_wang_rio_dmello_allan_wu">CS 125 Group 13 (Aaron Yao, Jimmy Wang, Rio Dmello, Allan Wu)</string>
 </resources>

@@ -1,7 +1,10 @@
 package com.example.zothikes
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -13,6 +16,11 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import java.io.IOException
+
+//button for recommendation text
+//marker with address
+
 
 class NearbyMap : AppCompatActivity(), OnMapReadyCallback,
     GoogleMap.OnMarkerClickListener {
@@ -82,10 +90,57 @@ class NearbyMap : AppCompatActivity(), OnMapReadyCallback,
     }
 
     private fun placeMarkerOnMap(location: LatLng) {
-        // 1
         val markerOptions = MarkerOptions().position(location)
-        // 2
+
+        val titleStr = getAddress(location)  // add these two lines
+        markerOptions.title(titleStr)
+
         map.addMarker(markerOptions)
+    }
+
+    private fun getAddress(latLng: LatLng): String {
+        // 1
+        val geocoder = Geocoder(this)
+        val addresses: List<Address>?
+        val address: Address?
+        var addressText = ""
+
+        try {
+            // 2
+            addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
+
+/**
+ * this code is to print all the of the details in the address from geocoder
+            var counter = 0
+            var swag = ""
+            while(counter < addresses.size)
+            {
+                swag += addresses[counter]
+                counter++
+            }
+            Toast.makeText(this, "address contents: $swag", Toast.LENGTH_SHORT).show()
+            */
+
+
+            // 3
+
+            if (null != addresses && !addresses.isEmpty()) {
+                address = addresses[0]
+                /**
+                Toast.makeText(this, "City: " + addresses[0].locality, Toast.LENGTH_SHORT).show()
+                for (i in 0 until address.maxAddressLineIndex) {
+                    addressText += if (i == 0) address.getAddressLine(i) else "\n" + address.getAddressLine(i)
+                }
+                Toast.makeText(this, "end result: $addressText", Toast.LENGTH_SHORT).show()
+                */
+                addressText = addresses[0].locality //city only temporarily
+            }
+
+        } catch (e: IOException) {
+            Log.e("MapsActivity", e.localizedMessage)
+        }
+
+        return addressText
     }
 
 }
