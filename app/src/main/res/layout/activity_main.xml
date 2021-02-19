@@ -16,6 +16,13 @@
         android:text="@string/info_prompt"
         android:textSize="20sp" />
 
+    <Button
+        android:id="@+id/finish_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/finish_button" />
+
     <TextView
         android:id="@+id/name_prompt"
         style="@style/input_prompts"
@@ -113,10 +120,4 @@
         android:hint="@string/goal_hint"
         android:inputType="textPersonName" />
 
-    <Button
-        android:id="@+id/finish_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/finish_button" />
 </LinearLayout>

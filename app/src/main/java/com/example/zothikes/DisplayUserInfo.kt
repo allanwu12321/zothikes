@@ -1,5 +1,6 @@
 package com.example.zothikes
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -8,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 
 /**
  * to do:
- * button should start new map activity with the hiking trails
  * if possible make it so user doesn't have to retype everything after hitting back button
+ * FIX BUTTON
  */
 
 class DisplayUserInfo : AppCompatActivity() {
@@ -20,6 +21,8 @@ class DisplayUserInfo : AppCompatActivity() {
         //confirm button code
         findViewById<Button>(R.id.confirm_button).setOnClickListener{
             Toast.makeText(this, "Information confirmed.", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MainMenu::class.java).apply{}
+            startActivity(intent)
         }
 
         //set TextViews to user data from previous activity

@@ -17,4 +17,7 @@
     <string name="finish_button">Finish</string>
     <string name="confirmation_prompt">Please confirm the data you have entered is correct. If you would like to make a change, press the back arrow.</string>
     <string name="confirm_button_prompt">Confirm</string>
+    <string name="title_activity_nearby_map">Map</string>
+    <string name="open_map">Open Map</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

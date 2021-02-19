@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
  * to do:
  * create an app icon
  * make toast darker to cover button
+ * FIX BUTTON
  */
 
 class MainActivity : AppCompatActivity() {
