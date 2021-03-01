@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 /**
  * to do:
  * if possible make it so user doesn't have to retype everything after hitting back button
- * FIX BUTTON
  */
 
 class DisplayUserInfo : AppCompatActivity() {

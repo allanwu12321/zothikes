@@ -18,7 +18,6 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import java.io.IOException
 
-//button for recommendation text
 //marker with address
 
 

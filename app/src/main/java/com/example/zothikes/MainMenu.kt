@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 /**
  * to do
- * add "update/change user info"
+ * get user activity levels and wake up time
  * add "activity log"
  */
 
@@ -21,10 +21,18 @@ class MainMenu : AppCompatActivity() {
             startActivity(intent)
         }
 
+        findViewById<Button>(R.id.edit_info_button).setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java).apply{}
+            startActivity(intent)
+            //mainActivity is to enter user's info.
+        }
+
         findViewById<Button>(R.id.recommend_button).setOnClickListener{
             val intent = Intent(this, RecommendationPage::class.java).apply{}
             startActivity(intent)
         }
+
+
     }
 
 
