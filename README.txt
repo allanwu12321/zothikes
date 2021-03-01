@@ -1,9 +1,10 @@
-2/13/2021
-2 activities:
-first activity takes user inputs.
-displays a button that, when pressed, converts them to strings,
-stores the strings in a MutableList and transitions to the second activity.
+ZotHikes is a recommendation app that suggests nearby outdoor activities to users (mostly hiking trails)
+based on their physical characteristics, location, goals and activity levels.
 
-second activity displays the information that the user inputted,
-and prompts the user to confirm the info or go back to the first
-activity to change it.
+2/18/2021
+As of now the app takes a user's physical characteristics as input and stores them.
+It asks for location permissions and if allowed, displays a map with the user's location.
+
+Future implementations:
+-menu option to edit/update physical characteristics/goals
+-activity log
