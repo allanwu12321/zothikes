@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
  * to do:
  * create an app icon
  * make toast darker to cover button
+ * reformat time inputs to actual numbers + am/pm dropdown menu
  */
 
 class MainActivity : AppCompatActivity() {
@@ -38,6 +39,8 @@ class MainActivity : AppCompatActivity() {
         user_data += findViewById<EditText>(R.id.weight_input).text.toString()
         user_data += findViewById<EditText>(R.id.gender_input).text.toString()
         user_data += findViewById<EditText>(R.id.goal_input).text.toString()
+        user_data += findViewById<EditText>(R.id.wake_input).text.toString()
+        user_data += findViewById<EditText>(R.id.sleep_input).text.toString()
         Toast.makeText(this, "Information updated.", Toast.LENGTH_SHORT).show()
 
         //pass data to next activity screen
@@ -49,6 +52,8 @@ class MainActivity : AppCompatActivity() {
             putExtra("weight", user_data[3])
             putExtra("gender", user_data[4])
             putExtra("goal", user_data[5])
+            putExtra("wake", user_data[6])
+            putExtra("sleep", user_data[7])
         }
         startActivity(intent)
     }

@@ -24,4 +24,11 @@
     <string name="recommendation">Recommendation</string>
     <string name="cs_125_group_13_aaron_yao_jimmy_wang_rio_dmello_allan_wu">CS 125 Group 13 (Aaron Yao, Jimmy Wang, Rio Dmello, Allan Wu)</string>
     <string name="edit_info">Edit Info</string>
+    <string name="wake_up_time">Wake-up Time:</string>
+    <string name="wake_hint">Wake-up Time</string>
+    <string name="sleep_time">Sleep Time:</string>
+    <string name="sleep_hint">Sleep Time</string>
+    <string name="activity_log">Activity Log</string>
+    <string name="add_activity">Add Activity</string>
+    <string name="activity">Activity</string>
 </resources>
