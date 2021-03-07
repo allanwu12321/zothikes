@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 /**
@@ -41,7 +40,6 @@ class MainActivity : AppCompatActivity() {
         user_data += findViewById<EditText>(R.id.goal_input).text.toString()
         user_data += findViewById<EditText>(R.id.wake_input).text.toString()
         user_data += findViewById<EditText>(R.id.sleep_input).text.toString()
-        Toast.makeText(this, "Information updated.", Toast.LENGTH_SHORT).show()
 
         //pass data to next activity screen
         val intent = Intent(this, DisplayUserInfo::class.java).apply{

@@ -19,7 +19,7 @@ class DisplayUserInfo : AppCompatActivity() {
 
         //confirm button code
         findViewById<Button>(R.id.confirm_button).setOnClickListener{
-            Toast.makeText(this, "Information confirmed.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Information updated.", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MainMenu::class.java).apply{
                 // Temporary way to pass User information
                 putExtra("name", intent.getStringExtra("name"))
