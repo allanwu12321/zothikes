@@ -13,7 +13,10 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.material.internal.ContextUtils.getActivity
 import org.json.JSONObject
+
 
 /**
  * to do:
@@ -25,12 +28,13 @@ class DisplayUserInfo : AppCompatActivity() {
     var dialog: ProgressDialog? = null
     val serverAPIURL: String = "http://10.0.2.2:5000/api/post_user"
     val TAG = "ZotHikes"
-    fun SendSignUpDataToServer(name: String?, age: String?, height: String?, weight: String?, gender: String?, target_weight: String?) {
+    fun SendSignUpDataToServer(name: String?,email: String?, age: String?, height: String?, weight: String?, gender: String?, target_weight: String?) {
         volleyRequestQueue = Volley.newRequestQueue(this)
         dialog = ProgressDialog.show(this, "", "Please wait...", true);
         val parameters: MutableMap<String, String?> = HashMap()
         // Add your parameters in HashMap
         parameters["name"] = name;
+        parameters["email"] = email;
         parameters["age"] = age;
         parameters["height"] = height;
         parameters["weight"] = weight;
@@ -95,6 +99,7 @@ class DisplayUserInfo : AppCompatActivity() {
         //confirm button code
         findViewById<Button>(R.id.confirm_button).setOnClickListener{
             Toast.makeText(this, "Information updated.", Toast.LENGTH_SHORT).show()
+            val acct = GoogleSignIn.getLastSignedInAccount(this)
             val intent = Intent(this, MainMenu::class.java).apply{
                 // Temporary way to pass User information
                 putExtra("name", intent.getStringExtra("name"))
@@ -105,7 +110,9 @@ class DisplayUserInfo : AppCompatActivity() {
                 putExtra("goal", intent.getStringExtra("goal"))
             }
 //            intent.getStringExtra("name")?.let { it1 -> Log.d("name", it1) }
-            SendSignUpDataToServer(intent.getStringExtra("name"), intent.getStringExtra("age"), intent.getStringExtra("height"), intent.getStringExtra("weight"), intent.getStringExtra("gender"), intent.getStringExtra("goal"))
+            if (acct != null) {
+                SendSignUpDataToServer(intent.getStringExtra("name"), acct.email, intent.getStringExtra("age"), intent.getStringExtra("height"), intent.getStringExtra("weight"), intent.getStringExtra("gender"), intent.getStringExtra("goal"))
+            }
             startActivity(intent)
         }
 
