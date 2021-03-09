@@ -2,17 +2,20 @@ package com.example.zothikes
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.android.volley.AuthFailureError
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.location.LocationServices
 import org.json.JSONObject
 
 /**
@@ -32,6 +35,7 @@ import org.json.JSONObject
  */
 
 class MainMenu : AppCompatActivity() {
+    companion object{private const val LOCATION_PERMISSION_REQUEST_CODE = 1}
 
     var volleyRequestQueue: RequestQueue? = null
     var dialog: ProgressDialog? = null
@@ -99,6 +103,29 @@ class MainMenu : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
         val user_data = mutableListOf<String>()
+        var user_latitude = 0.0
+        var user_longitude = 0.0
+
+        var fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)  //location permission request
+        }
+
+        fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
+            // Got last known location. In some rare situations this can be null.
+            Toast.makeText(this, "$location", Toast.LENGTH_SHORT).show()
+            if (location != null) {
+                user_latitude = location.latitude
+                user_longitude = location.longitude
+                Toast.makeText(this, "Coordinates: $user_latitude , $user_longitude", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                Toast.makeText(this, "ERROR: Location could not be found.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        Toast.makeText(this, "Coordinates: $user_latitude , $user_longitude", Toast.LENGTH_SHORT).show()
 
         findViewById<Button>(R.id.open_map_button).setOnClickListener{
             val intent = Intent(this, NearbyMap::class.java).apply{}
