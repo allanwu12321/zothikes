@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:gravity="bottom"
     android:orientation="vertical"
-    tools:context=".ActivityLog">
+    tools:context=".ActivityLog"
+    android:background="@drawable/pngtreeblue_sky_white_clouds_splashes_911603">
 
 
     <ScrollView

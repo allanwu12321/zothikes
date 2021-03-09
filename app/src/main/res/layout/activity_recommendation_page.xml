@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecommendationPage">
+    tools:context=".RecommendationPage"
+    android:background="@drawable/pngtreeblue_sky_white_clouds_splashes_911603">
 
     <TextView
         android:id="@+id/recommendation_text"

@@ -6,11 +6,12 @@
     android:id="@+id/ScrollView"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@drawable/pngtreesummer_camping_hand_painted_outdoor_945101"
     >
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".MainMenu">
 
     <TextView
@@ -40,7 +41,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_menu_title"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/_82_3827159_tree_clipart_spring_tree_nature_vector_page_borders" />
+        app:srcCompat="@drawable/menu_pic" />
 
     <Button
         android:id="@+id/open_map_button"
