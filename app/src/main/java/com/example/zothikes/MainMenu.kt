@@ -35,7 +35,7 @@ class MainMenu : AppCompatActivity() {
 
     var volleyRequestQueue: RequestQueue? = null
     var dialog: ProgressDialog? = null
-    val serverAPIURL: String = "http://10.0.2.2:5000/api/get_trails"
+    val serverAPIURL: String = "http://10.0.2.2:5000/api/get_recommendation"
     val TAG = "ZotHikes"
     fun SendSignUpDataToServer(email: String?) {
         volleyRequestQueue = Volley.newRequestQueue(this)

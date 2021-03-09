@@ -28,7 +28,7 @@ class DisplayUserInfo : AppCompatActivity() {
     var dialog: ProgressDialog? = null
     val serverAPIURL: String = "http://10.0.2.2:5000/api/post_user"
     val TAG = "ZotHikes"
-    fun SendSignUpDataToServer(name: String?,email: String?, age: String?, height: String?, weight: String?, gender: String?, target_weight: String?) {
+    fun SendSignUpDataToServer(name: String?,email: String?, age: String?, height: String?, weight: String?, gender: String?, target_weight: String?, latitude: String?, longitude: String?) {
         volleyRequestQueue = Volley.newRequestQueue(this)
         dialog = ProgressDialog.show(this, "", "Please wait...", true);
         val parameters: MutableMap<String, String?> = HashMap()
@@ -40,6 +40,8 @@ class DisplayUserInfo : AppCompatActivity() {
         parameters["weight"] = weight;
         parameters["gender"] = gender;
         parameters["target_weight"] = target_weight;
+        parameters["latitude"] = latitude;
+        parameters["longitude"] = longitude;
 
         val strReq: StringRequest = object : StringRequest(
                 Method.POST,serverAPIURL,
@@ -109,9 +111,9 @@ class DisplayUserInfo : AppCompatActivity() {
                 putExtra("gender", intent.getStringExtra("gender"))
                 putExtra("goal", intent.getStringExtra("goal"))
             }
-//            intent.getStringExtra("name")?.let { it1 -> Log.d("name", it1) }
+//            intent.getStringExtra("name")?.let { it1 -> Log.d("name", it1) } // for debugging
             if (acct != null) {
-                SendSignUpDataToServer(intent.getStringExtra("name"), acct.email, intent.getStringExtra("age"), intent.getStringExtra("height"), intent.getStringExtra("weight"), intent.getStringExtra("gender"), intent.getStringExtra("goal"))
+                SendSignUpDataToServer(intent.getStringExtra("name"), acct.email, intent.getStringExtra("age"), intent.getStringExtra("height"), intent.getStringExtra("weight"), intent.getStringExtra("gender"), intent.getStringExtra("goal"),"0","0")
             }
             startActivity(intent)
         }
