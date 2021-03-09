@@ -41,12 +41,14 @@ class MainMenu : AppCompatActivity() {
     var dialog: ProgressDialog? = null
     val serverAPIURL: String = "http://10.0.2.2:5000/api/get_recommendation"
     val TAG = "ZotHikes"
-    fun SendSignUpDataToServer(email: String?) {
+    fun SendSignUpDataToServer(email: String?, latitude: String?, longitude: String?) {
         volleyRequestQueue = Volley.newRequestQueue(this)
         dialog = ProgressDialog.show(this, "", "Please wait...", true);
         val parameters: MutableMap<String, String?> = HashMap()
         // Add your parameters in HashMap
         parameters["email"] = email;
+        parameters["latitude"] = latitude;
+        parameters["longitude"] = longitude;
 
         val strReq: StringRequest = object : StringRequest(
                 Method.GET,serverAPIURL,
@@ -135,7 +137,7 @@ class MainMenu : AppCompatActivity() {
         findViewById<Button>(R.id.recommend_button).setOnClickListener{
             val acct = GoogleSignIn.getLastSignedInAccount(this)
             if (acct != null) {
-                SendSignUpDataToServer((acct.email))
+                SendSignUpDataToServer(acct.email, user_latitude.toString(), user_longitude.toString())
             }
             val intent = Intent(this, RecommendationPage::class.java).apply{}
             startActivity(intent)
