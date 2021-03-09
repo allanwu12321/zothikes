@@ -15,7 +15,9 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import org.json.JSONArray
 import org.json.JSONObject
 
 /**
@@ -24,18 +26,20 @@ import org.json.JSONObject
  * add "activity log" -- data should go to recommendation system to help get to target weight
  * choose city? how do we know which hiking trails to display? maybe need to have a distance radius setting too.
  *
- * notification? -- complicated
- * no need to pass data around through intents, should be using db anyways.
  *
  * styling:
  * matching button sizes
  * maybe new font
- * new image
  *
+ *
+ * how do we ask for permissions again if they initially deny it? what do we display/send if permissions denied?
  */
 
 class MainMenu : AppCompatActivity() {
     companion object{private const val LOCATION_PERMISSION_REQUEST_CODE = 1}
+    var user_latitude = 0.0
+    var user_longitude = 0.0
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     var volleyRequestQueue: RequestQueue? = null
     var dialog: ProgressDialog? = null
@@ -47,31 +51,38 @@ class MainMenu : AppCompatActivity() {
         val parameters: MutableMap<String, String?> = HashMap()
         // Add your parameters in HashMap
         parameters["email"] = email;
-        parameters["latitude"] = latitude;
-        parameters["longitude"] = longitude;
-
+        parameters["latitude"] = latitude
+        parameters["longitude"] = longitude
         val strReq: StringRequest = object : StringRequest(
-                Method.GET,serverAPIURL,
+                Method.POST,serverAPIURL,
                 Response.Listener { response ->
                     Log.e(TAG, "response: " + response)
                     dialog?.dismiss()
 
                     // Handle Server response here
-//                    try {
-//                        val responseObj = JSONObject(response)
+                    try {
+                        val responseObj = JSONArray(response)
+                        for (i in 0 until responseObj.length()) {
+                            Log.e("Trail Name", ""+responseObj[i])
+//                            val jsonObj = responseObj.getJSONObject(i)
+//                            val trailName = jsonObj.getString("Name")
+//                            Log.e("Name ", trailName)
+                        }
+
 //                        val isSuccess = responseObj.getBoolean("isSuccess")
 //                        val code = responseObj.getInt("code")
 //                        val message = responseObj.getString("message")
+//                        Log.e("REAcher ", "REaching here?")
 //                        if (responseObj.has("data")) {
-//                            val data = responseObj.getJSONObject("data")
+//                            val data = responseObj.getJSONArray("data")
 //                            // Handle your server response data here
 //                        }
 //                        Toast.makeText(this,message,Toast.LENGTH_LONG).show()
-//
-//                    } catch (e: Exception) { // caught while parsing the response
-//                        Log.e(TAG, "problem occurred")
-//                        e.printStackTrace()
-//                    }
+
+                    } catch (e: Exception) { // caught while parsing the response
+                        Log.e(TAG, "problem occurred")
+                        e.printStackTrace()
+                    }
                 },
                 Response.ErrorListener { volleyError -> // error occurred
                     Log.e(TAG, "problem occurred, volley error: " + volleyError.message)
@@ -105,29 +116,9 @@ class MainMenu : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
         val user_data = mutableListOf<String>()
-        var user_latitude = 0.0
-        var user_longitude = 0.0
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        getLocation()
 
-        var fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)  //location permission request
-        }
-
-        fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
-            // Got last known location. In some rare situations this can be null.
-            Toast.makeText(this, "$location", Toast.LENGTH_SHORT).show()
-            if (location != null) {
-                user_latitude = location.latitude
-                user_longitude = location.longitude
-                Toast.makeText(this, "Coordinates: $user_latitude , $user_longitude", Toast.LENGTH_SHORT).show()
-            }
-            else{
-                Toast.makeText(this, "ERROR: Location could not be found.", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        Toast.makeText(this, "Coordinates: $user_latitude , $user_longitude", Toast.LENGTH_SHORT).show()
 
         findViewById<Button>(R.id.open_map_button).setOnClickListener{
             val intent = Intent(this, NearbyMap::class.java).apply{}
@@ -160,6 +151,39 @@ class MainMenu : AppCompatActivity() {
         }
 
 
+    }
+
+    fun getLocation()
+    {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)  //location permission request
+        }
+
+        fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
+            // Got last known location. In some rare situations this can be null.
+            if (location != null) {
+                user_latitude = location.latitude
+                user_longitude = location.longitude
+                Toast.makeText(this, "Coordinates: $user_latitude , $user_longitude", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                Toast.makeText(this, "ERROR: Location could not be found.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == 1) // gucci
+        {
+            if (grantResults.contains(PackageManager.PERMISSION_GRANTED))
+            {
+                Toast.makeText(this, "permissions are good.", Toast.LENGTH_SHORT).show()
+                getLocation()
+            }
+
+
+        }
     }
 
 
