@@ -69,27 +69,18 @@
         app:layout_constraintTop_toBottomOf="@+id/open_map_button" />
 
     <Button
-        android:id="@+id/log_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:layout_weight="1"
-        android:text="@string/activity_log"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recommend_button" />
-
-    <Button
         android:id="@+id/edit_info_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_weight="1"
         android:text="@string/edit_info"
+        app:backgroundTintMode="add"
+        app:iconTint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/log_button" />
+        app:layout_constraintTop_toBottomOf="@+id/recommend_button" />
 
     <Button
         android:id="@+id/logout_button"

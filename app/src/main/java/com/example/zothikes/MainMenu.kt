@@ -114,11 +114,6 @@ class MainMenu : AppCompatActivity() {
             startActivity(intent)
         }
 
-        findViewById<Button>(R.id.log_button).setOnClickListener{
-            val intent = Intent(this, ActivityLog::class.java).apply{}
-            startActivity(intent)
-        }
-
         findViewById<Button>(R.id.edit_info_button).setOnClickListener{
             val intent = Intent(this, MainActivity::class.java).apply{}
             startActivity(intent)
