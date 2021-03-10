@@ -40,6 +40,7 @@ class MainMenu : AppCompatActivity() {
     var user_latitude = 0.0
     var user_longitude = 0.0
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    var recommended_trails = JSONArray()
 
     var volleyRequestQueue: RequestQueue? = null
     var dialog: ProgressDialog? = null
@@ -62,6 +63,7 @@ class MainMenu : AppCompatActivity() {
                     // Handle Server response here
                     try {
                         val responseObj = JSONArray(response)
+                        recommended_trails = JSONArray(response)
                         for (i in 0 until responseObj.length()) {
                             Log.e("Trail Name", ""+responseObj[i])
 //                            val jsonObj = responseObj.getJSONObject(i)
@@ -130,7 +132,14 @@ class MainMenu : AppCompatActivity() {
             if (acct != null) {
                 SendSignUpDataToServer(acct.email, user_latitude.toString(), user_longitude.toString())
             }
-            val intent = Intent(this, RecommendationPage::class.java).apply{}
+
+            val intent = Intent(this, RecommendationPage::class.java).apply{
+                for (i in 0 until recommended_trails.length())
+                {
+                    putExtra("$i", recommended_trails[i].toString())
+                    Log.e("?", "$recommended_trails[i]")
+                }
+            }
             startActivity(intent)
         }
 
