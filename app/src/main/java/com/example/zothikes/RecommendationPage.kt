@@ -1,7 +1,8 @@
 package com.example.zothikes
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -16,6 +17,13 @@ class RecommendationPage : AppCompatActivity() {
         findViewById<TextView>(R.id.fifth_trail).apply {text = intent.getStringExtra("4")}
 
         //because 5 trails
+
+        findViewById<Button>(R.id.view_on_map_button).setOnClickListener{
+            val intent = Intent(this, NearbyMap::class.java).apply{
+
+            }
+            startActivity(intent)
+        }
 
     }
 }

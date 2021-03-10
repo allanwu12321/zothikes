@@ -62,4 +62,11 @@
         android:textAlignment="center"
         android:textSize="20sp" />
 
+    <Button
+        android:id="@+id/view_on_map_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/view_trails_on_map" />
+
 </LinearLayout>
