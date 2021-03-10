@@ -43,6 +43,21 @@ class NearbyMap : AppCompatActivity(), OnMapReadyCallback,
         mapFragment.getMapAsync(this)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+//        intent.getStringExtra("latitudes0")?.let { Log.d("Element 0", it) }
+//        intent.getStringExtra("longitudes0")?.let { Log.d("Element 0", it) }
+//        intent.getStringExtra("0")?.let { Log.d("Element 0", it) }
+//        intent.getStringExtra("latitudes1")?.let { Log.d("Element 1", it) }
+//        intent.getStringExtra("longitudes1")?.let { Log.d("Element 1", it) }
+//        intent.getStringExtra("1")?.let { Log.d("Element 1", it) }
+//        intent.getStringExtra("latitudes2")?.let { Log.d("Element 2", it) }
+//        intent.getStringExtra("longitudes2")?.let { Log.d("Element 2", it) }
+//        intent.getStringExtra("2")?.let { Log.d("Element 2", it) }
+//        intent.getStringExtra("latitudes3")?.let { Log.d("Element 3", it) }
+//        intent.getStringExtra("longitudes3")?.let { Log.d("Element 3", it) }
+//        intent.getStringExtra("3")?.let { Log.d("Element 3", it) }
+//        intent.getStringExtra("latitudes4")?.let { Log.d("Element 4", it) }
+//        intent.getStringExtra("longitudes4")?.let { Log.d("Element 4", it) }
+//        intent.getStringExtra("4")?.let { Log.d("Element 4", it) }
 
     }
 
@@ -83,11 +98,25 @@ class NearbyMap : AppCompatActivity(), OnMapReadyCallback,
                 lastLocation = location
                 val currentLatLng = LatLng(location.latitude, location.longitude)
                 placeMarkerOnMap(currentLatLng)
+
+                intent.getStringExtra("latitudes0")?.let { placeMarkerOnMap2(it, intent.getStringExtra("longitudes0")!!, intent.getStringExtra("0")) }
+                intent.getStringExtra("latitudes1")?.let { placeMarkerOnMap2(it, intent.getStringExtra("longitudes1")!!, intent.getStringExtra("1")) }
+                intent.getStringExtra("latitudes2")?.let { placeMarkerOnMap2(it, intent.getStringExtra("longitudes2")!!, intent.getStringExtra("2")) }
+                intent.getStringExtra("latitudes3")?.let { placeMarkerOnMap2(it, intent.getStringExtra("longitudes3")!!, intent.getStringExtra("3")) }
+                intent.getStringExtra("latitudes4")?.let { placeMarkerOnMap2(it, intent.getStringExtra("longitudes4")!!, intent.getStringExtra("4")) }
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
             }
         }
     }
 
+    private fun placeMarkerOnMap2(lat:String, long:String, name: String?) {
+        val curLatLng = LatLng(lat.toDouble(),long.toDouble())
+        val markerOptions = MarkerOptions().position(curLatLng)
+
+        markerOptions.title(name)
+
+        map.addMarker(markerOptions)
+    }
     private fun placeMarkerOnMap(location: LatLng) {
         val markerOptions = MarkerOptions().position(location)
 
