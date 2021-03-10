@@ -63,12 +63,9 @@ class MainMenu : AppCompatActivity() {
                     // Handle Server response here
                     try {
                         val responseObj = JSONArray(response)
-                        recommended_trails = JSONArray(response)
                         for (i in 0 until responseObj.length()) {
                             Log.e("Trail Name", ""+responseObj[i])
-//                            val jsonObj = responseObj.getJSONObject(i)
-//                            val trailName = jsonObj.getString("Name")
-//                            Log.e("Name ", trailName)
+                            recommended_trails.put(responseObj[i])
                         }
 
 //                        val isSuccess = responseObj.getBoolean("isSuccess")
@@ -120,24 +117,16 @@ class MainMenu : AppCompatActivity() {
         val user_data = mutableListOf<String>()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getLocation()
-
-
         findViewById<Button>(R.id.open_map_button).setOnClickListener{
             val intent = Intent(this, NearbyMap::class.java).apply{}
             startActivity(intent)
         }
-
         findViewById<Button>(R.id.recommend_button).setOnClickListener{
-            val acct = GoogleSignIn.getLastSignedInAccount(this)
-            if (acct != null) {
-                SendSignUpDataToServer(acct.email, user_latitude.toString(), user_longitude.toString())
-            }
-
             val intent = Intent(this, RecommendationPage::class.java).apply{
+                Log.e("Length is:", recommended_trails.length().toString())
                 for (i in 0 until recommended_trails.length())
                 {
                     putExtra("$i", recommended_trails[i].toString())
-                    Log.e("?", "$recommended_trails[i]")
                 }
             }
             startActivity(intent)
@@ -159,7 +148,6 @@ class MainMenu : AppCompatActivity() {
                     }
         }
 
-
     }
 
     fun getLocation()
@@ -174,6 +162,10 @@ class MainMenu : AppCompatActivity() {
                 user_latitude = location.latitude
                 user_longitude = location.longitude
                 Toast.makeText(this, "Coordinates: $user_latitude , $user_longitude", Toast.LENGTH_SHORT).show()
+                val acct = GoogleSignIn.getLastSignedInAccount(this)
+                if (acct != null) {
+                    SendSignUpDataToServer(acct.email, user_latitude.toString(), user_longitude.toString())
+                }
             }
             else{
                 Toast.makeText(this, "ERROR: Location could not be found.", Toast.LENGTH_SHORT).show()

@@ -35,4 +35,5 @@
     <string name="login_with_google">Login with Google</string>
     <string name="welcome_to_zothikes">Welcome to Zot Hikes</string>
     <string name="to_get_started_please_login_with_your_google_account">To get started, please login with your Google Account:</string>
+    <string name="trails_you_might_like">Trails you might like</string>
 </resources>
