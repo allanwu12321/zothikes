@@ -41,6 +41,8 @@ class MainMenu : AppCompatActivity() {
     var user_longitude = 0.0
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     var recommended_trails = JSONArray()
+    var latitudes = JSONArray()
+    var longitudes = JSONArray()
 
     var volleyRequestQueue: RequestQueue? = null
     var dialog: ProgressDialog? = null
@@ -64,8 +66,12 @@ class MainMenu : AppCompatActivity() {
                     try {
                         val responseObj = JSONArray(response)
                         for (i in 0 until responseObj.length()) {
-                            Log.e("Trail Name", ""+responseObj[i])
-                            recommended_trails.put(responseObj[i])
+                            Log.e("Trail Name", ""+responseObj.getJSONArray(i)[0])
+                            Log.e("Trail Latitude", ""+ responseObj.getJSONArray(i).getJSONObject(1).getString("latitude"))
+                            Log.e("Trail Longitude", ""+ responseObj.getJSONArray(i).getJSONObject(1).getString("longitude"))
+                            recommended_trails.put(responseObj.getJSONArray(i)[0])
+                            latitudes.put(responseObj.getJSONArray(i).getJSONObject(1).getString("latitude"))
+                            longitudes.put(responseObj.getJSONArray(i).getJSONObject(1).getString("longitude"))
                         }
 
 //                        val isSuccess = responseObj.getBoolean("isSuccess")
@@ -127,6 +133,8 @@ class MainMenu : AppCompatActivity() {
                 for (i in 0 until recommended_trails.length())
                 {
                     putExtra("$i", recommended_trails[i].toString())
+                    putExtra("latitudes$i", latitudes[i].toString())
+                    putExtra("longitudes$i", longitudes[i].toString())
                 }
             }
             startActivity(intent)
