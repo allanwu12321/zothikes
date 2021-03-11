@@ -124,12 +124,19 @@ class MainMenu : AppCompatActivity() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getLocation()
         findViewById<Button>(R.id.open_map_button).setOnClickListener{
-            val intent = Intent(this, NearbyMap::class.java).apply{}
+            val intent = Intent(this, NearbyMap::class.java).apply{
+                for (i in 0 until recommended_trails.length())
+                {
+                    putExtra("$i", recommended_trails[i].toString())
+                    putExtra("latitudes$i", latitudes[i].toString())
+                    putExtra("longitudes$i", longitudes[i].toString())
+                }
+            }
             startActivity(intent)
         }
         findViewById<Button>(R.id.recommend_button).setOnClickListener{
             val intent = Intent(this, RecommendationPage::class.java).apply{
-                Log.e("Length is:", recommended_trails.length().toString())
+//                Log.e("Length is:", recommended_trails.length().toString())
                 for (i in 0 until recommended_trails.length())
                 {
                     putExtra("$i", recommended_trails[i].toString())
