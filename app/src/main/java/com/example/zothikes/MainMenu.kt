@@ -20,21 +20,6 @@ import com.google.android.gms.location.LocationServices
 import org.json.JSONArray
 import org.json.JSONObject
 
-/**
- * to do:
- * get user activity levels and wake up time
- * add "activity log" -- data should go to recommendation system to help get to target weight
- * choose city? how do we know which hiking trails to display? maybe need to have a distance radius setting too.
- *
- *
- * styling:
- * matching button sizes
- * maybe new font
- *
- *
- * how do we ask for permissions again if they initially deny it? what do we display/send if permissions denied?
- */
-
 class MainMenu : AppCompatActivity() {
     companion object{private const val LOCATION_PERMISSION_REQUEST_CODE = 1}
     var user_latitude = 0.0
@@ -176,7 +161,7 @@ class MainMenu : AppCompatActivity() {
             if (location != null) {
                 user_latitude = location.latitude
                 user_longitude = location.longitude
-                Toast.makeText(this, "Coordinates: $user_latitude , $user_longitude", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "Coordinates: $user_latitude , $user_longitude", Toast.LENGTH_SHORT).show()
                 val acct = GoogleSignIn.getLastSignedInAccount(this)
                 if (acct != null) {
                     SendSignUpDataToServer(acct.email, user_latitude.toString(), user_longitude.toString())
@@ -194,7 +179,7 @@ class MainMenu : AppCompatActivity() {
         {
             if (grantResults.contains(PackageManager.PERMISSION_GRANTED))
             {
-                Toast.makeText(this, "permissions are good.", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "permissions are good.", Toast.LENGTH_SHORT).show()
                 getLocation()
             }
 

@@ -7,12 +7,6 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 
-/**
- * to do:
- * create an app icon
- * make toast darker to cover button
- * reformat time inputs to actual numbers + am/pm dropdown menu
- */
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

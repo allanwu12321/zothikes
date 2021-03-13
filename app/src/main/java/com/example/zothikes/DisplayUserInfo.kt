@@ -17,12 +17,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.material.internal.ContextUtils.getActivity
 import org.json.JSONObject
 
-
-/**
- * to do:
- * if possible make it so user doesn't have to retype everything after hitting back button
- */
-
 class DisplayUserInfo : AppCompatActivity() {
     var volleyRequestQueue: RequestQueue? = null
     var dialog: ProgressDialog? = null

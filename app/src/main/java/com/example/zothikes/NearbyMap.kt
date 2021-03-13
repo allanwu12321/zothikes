@@ -18,8 +18,8 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import java.io.IOException
 
-//marker with address
 
+// used code from https://www.raywenderlich.com/230-introduction-to-google-maps-api-for-android-with-kotlin
 
 class NearbyMap : AppCompatActivity(), OnMapReadyCallback,
     GoogleMap.OnMarkerClickListener {

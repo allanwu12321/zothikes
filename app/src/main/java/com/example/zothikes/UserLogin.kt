@@ -13,7 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 
-//https://johncodeos.com/how-to-add-google-login-button-to-your-android-app-using-kotlin/
+//used code from https://johncodeos.com/how-to-add-google-login-button-to-your-android-app-using-kotlin/
 lateinit var mGoogleSignInClient: GoogleSignInClient
 private val RC_SIGN_IN = 9001
 
